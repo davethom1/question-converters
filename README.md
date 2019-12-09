@@ -88,5 +88,4 @@ What is your sex?
 
 ## Author
 
-Libby Hemphill ([libbyh@umich.edu](mailto:libbyh@umich.edu)), RCMD director, wrote the original code and is where you should direct questions.  
-
+David Thomas (davethom@umich.edu)
