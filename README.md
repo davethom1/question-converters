@@ -64,7 +64,7 @@ See [Open_Data_Flint_Revised_Pilot.qsf](Open_Data_Flint_Revised_Pilot.qsf) for a
 
 ## ICPSR Question Text
 
-Here's an exerpt from the [Longitudinal Study of the Second Generation in Spain (ILSEG)](https://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/36286):
+Here's an excerpt from the [Longitudinal Study of the Second Generation in Spain (ILSEG)](https://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/36286):
 
 ```
 path         = .
