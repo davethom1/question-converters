@@ -17,7 +17,12 @@ proc_data_folder = "data/processed/"
 # place data in file in appropriate location in new file
 
 admin_file = proc_data_folder + "admin.csv"
-df = pandas.read_csv("agencies.csv", index_col = 'YEARLY_AGENCY_ID')
+# create dataframe
+df1 = pandas.read_csv(fbi_data_folder + "agencies.csv", index_col = 'YEARLY_AGENCY_ID')
+# grab state_id and ori
+df.get (["STATE_ID", "ORI"])
+df2 = pandas.read_csv(fbi_data_folder + "NIBRS_incident.csv", index_col = 'DATA_YEAR')
+
 
 # make the offense file
 # inputs to offense file: agencies, NIBRS_OFFENSE, NIBRS_SUSPECT_USING, NIBRS_CRIMINAL_ACT, NIBRS_WEAPON, NIBRS_BIAS_MOTIVATION
