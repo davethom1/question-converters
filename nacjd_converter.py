@@ -11,8 +11,13 @@ proc_data_folder = "data/processed/"
 
 # make the admin file
 # inputs to admin file: agencies, nibrs_incident
+# load input files
+# look for relevant columns
+# store data
+# place data in file in appropriate location in new file
 
 admin_file = proc_data_folder + "admin.csv"
+df = pandas.read_csv("agencies.csv", index_col = 'YEARLY_AGENCY_ID')
 
 # make the offense file
 # inputs to offense file: agencies, NIBRS_OFFENSE, NIBRS_SUSPECT_USING, NIBRS_CRIMINAL_ACT, NIBRS_WEAPON, NIBRS_BIAS_MOTIVATION
