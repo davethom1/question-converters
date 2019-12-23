@@ -41,12 +41,27 @@ print(df_incident_admin.head())
 df_agency_incidents = pd.merge(df_agency_admin, df_incident_admin, on='AGENCY_ID')
 print(df_agency_incidents.head())
 
-print(str(len(df_agency_incidents)) + " records when we merge agencies and incidents. Should match N-incidents above")
+#create variable that counts instances of offense ID by Incidents
+df_offense = pd.read_csv(fbi_data_folder + "NIBRS_OFFENSE.csv")
+print(str(len(df_offense)) + "offenses by ID in this file")
+offense_cols = ["INCIDENT_ID", "OFFENSE_ID"]
+df_offense_admin = df_offense[offense_cols]
+print(df_offense_admin.head())
+
+# df_offense_admin["TOT_OFFENSE"] = df_offense_admin.groupby(["INCIDENT_ID"]).count("OFFENSE_ID")
+df_offense_admin_count["INCIDENT_ID"] = df_offense_admin["INCIDENT_ID"]
+df_offense_admin_count["OFFENSE_CT"] = df_offense_admin.value_counts("OFFENSE_ID")
+print(df_offense_admin_count.head(25))
+
+
+
+
+# print(str(len(df_agency_incidents)) + " records when we merge agencies and incidents. Should match N-incidents above")
 
 # create a list of column names to send SPSS
 
 #save this file out to processed. It will be dataset 2 for curation.
-pyreadstat.write_sav(df_agency_incidents, proc_data_folder + "agency_incidents.sav", file_label="agency incidents")
+# pyreadstat.write_sav(df_agency_incidents, proc_data_folder + "agency_incidents.sav", file_label="agency incidents")
 
 # # make the offense file
 # # inputs to offense file: agencies, NIBRS_OFFENSE, NIBRS_SUSPECT_USING, NIBRS_CRIMINAL_ACT, NIBRS_WEAPON, NIBRS_BIAS_MOTIVATION
