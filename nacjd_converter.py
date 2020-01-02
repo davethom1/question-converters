@@ -42,16 +42,16 @@ df_agency_incidents = pd.merge(df_agency_admin, df_incident_admin, on='AGENCY_ID
 print(df_agency_incidents.head())
 
 #create variable that counts instances of offense ID by Incidents
-df_offense = pd.read_csv(fbi_data_folder + "NIBRS_OFFENSE.csv")
-print(str(len(df_offense)) + "offenses by ID in this file")
-offense_cols = ["INCIDENT_ID", "OFFENSE_ID"]
-df_offense_admin = df_offense[offense_cols]
-print(df_offense_admin.head())
-
-# df_offense_admin["TOT_OFFENSE"] = df_offense_admin.groupby(["INCIDENT_ID"]).count("OFFENSE_ID")
-df_offense_admin_count["INCIDENT_ID"] = df_offense_admin["INCIDENT_ID"]
-df_offense_admin_count["OFFENSE_CT"] = df_offense_admin.value_counts("OFFENSE_ID")
-print(df_offense_admin_count.head(25))
+# df_offense = pd.read_csv(fbi_data_folder + "NIBRS_OFFENSE.csv")
+# print(str(len(df_offense)) + "offenses by ID in this file")
+# offense_cols = ["INCIDENT_ID", "OFFENSE_ID"]
+# df_offense_admin = df_offense[offense_cols]
+# print(df_offense_admin.head())
+#
+# # df_offense_admin["TOT_OFFENSE"] = df_offense_admin.groupby(["INCIDENT_ID"]).count("OFFENSE_ID")
+# df_offense_admin_count["INCIDENT_ID"] = df_offense_admin["INCIDENT_ID"]
+# df_offense_admin_count["OFFENSE_CT"] = df_offense_admin.value_counts("OFFENSE_ID")
+# print(df_offense_admin_count.head(25))
 
 
 
@@ -67,6 +67,10 @@ print(df_offense_admin_count.head(25))
 # # inputs to offense file: agencies, NIBRS_OFFENSE, NIBRS_SUSPECT_USING, NIBRS_CRIMINAL_ACT, NIBRS_WEAPON, NIBRS_BIAS_MOTIVATION
 #
 # offense_file = proc_data_folder + "offense.csv"
+
+
+
+
 #
 # # make the property file
 # # input to property file: agencies, NIBRS_PROPERTY, NIBRS_incident, NIBRS_PROP_DESC, NIBRS_SUSPECTED_DRUG
