@@ -83,12 +83,21 @@ print(df_offense_offense.head())
 
 # create suspect_using dataframe
 df_suspect_using = pd.read_csv(fbi_data_folder + "NIBRS_SUSPECT_USING.csv")
-print(str(len(df_suspect_using)) + " names of suspect using items in this file")
+print(str(len(df_suspect_using)) + " names of items suspect using in this file")
 
-# create a list of columns from suspect_using file
+# create a list of columns from suspect_using file for ofeense data file
 suspect_using_cols = ["OFFENSE_ID", "SUSPECT_USING_ID"]
 df_suspect_using_offense = df_suspect_using[suspect_using_cols]
 print(df_suspect_using_offense.head())
+
+# create criminal_act dataframe
+df_criminal_act = pd.read_csv(fbi_data_folder + "NIBRS_CRIMINAL_ACT.csv")
+print(str(len(df_criminal_act)) + " criminal acts connected to offense ID in this file")
+
+# create a list of columns from criminal_act for offense file
+criminal_act_cols = ["OFFENSE_ID", "CRIMINAL_ACT_ID"]
+df_criminal_act_offense = df_criminal_act[criminal_act_cols]
+print(df_criminal_act_offense.head())
 
 # use df_agency_admin dataframe
 
