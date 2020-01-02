@@ -19,7 +19,7 @@ proc_data_folder = "data/processed/"
 
 admin_file = proc_data_folder + "admin.csv"
 
-# create agendy dataframe
+# create agency dataframe
 df_agency = pd.read_csv(fbi_data_folder + "agencies.csv")
 
 # make dataframe with just admin info (agency_id, state_id, and ori [original TKTK])
@@ -37,11 +37,18 @@ incident_cols = ["AGENCY_ID", "INCIDENT_ID", "INCIDENT_DATE", "REPORT_DATE_FLAG"
 df_incident_admin = df_incident[incident_cols]
 print(df_incident_admin.head())
 
-#merge agency and incident admin files to create a one to many file of agency ids to incidents
+# merge agency and incident admin files to create a one to many file of agency ids to incidents
 df_agency_incidents = pd.merge(df_agency_admin, df_incident_admin, on='AGENCY_ID')
 print(df_agency_incidents.head())
 
-#create variable that counts instances of offense ID by Incidents
+# create a dataframe from agency and incident of variables agency (STATE_ID, ORI) and incident (INCIDENT_ID, INCIDENT_DATE)
+# use this as the first four variables for all the data files
+agency_incidents_cols = ["STATE_ID", "ORI", "INCIDENT_ID", "INCIDENT_DATE"]
+df_agency_incidents_all = df_agency_incidents[agency_incidents_cols]
+print(df_agency_incidents_all.head())
+
+
+# create variable that counts instances of offense ID by Incidents
 # df_offense = pd.read_csv(fbi_data_folder + "NIBRS_OFFENSE.csv")
 # print(str(len(df_offense)) + "offenses by ID in this file")
 # offense_cols = ["INCIDENT_ID", "OFFENSE_ID"]
@@ -52,23 +59,42 @@ print(df_agency_incidents.head())
 # df_offense_admin_count["INCIDENT_ID"] = df_offense_admin["INCIDENT_ID"]
 # df_offense_admin_count["OFFENSE_CT"] = df_offense_admin.value_counts("OFFENSE_ID")
 # print(df_offense_admin_count.head(25))
-
-
-
-
 # print(str(len(df_agency_incidents)) + " records when we merge agencies and incidents. Should match N-incidents above")
 
 # create a list of column names to send SPSS
 
-#save this file out to processed. It will be dataset 2 for curation.
+# save this file out to processed. It will be dataset 2 for curation.
 # pyreadstat.write_sav(df_agency_incidents, proc_data_folder + "agency_incidents.sav", file_label="agency incidents")
 
 # # make the offense file
 # # inputs to offense file: agencies, NIBRS_OFFENSE, NIBRS_SUSPECT_USING, NIBRS_CRIMINAL_ACT, NIBRS_WEAPON, NIBRS_BIAS_MOTIVATION
 #
-# offense_file = proc_data_folder + "offense.csv"
+offense_file = proc_data_folder + "offense.csv"
 
+# create offense dataframe
+df_offense = pd.read_csv(fbi_data_folder + "NIBRS_OFFENSE.csv")
+print(str(len(df_offense)) + " offenses in this file")
 
+# create a list of columns from offense file
+offense_cols = ["INCIDENT_ID", "OFFENSE_ID", "ATTEMPT_COMPLETE_FLAG", "LOCATION_ID", "NUM_PREMISES_ENTERED",
+                "METHOD_ENTRY_CODE"]
+df_offense_offense = df_offense[offense_cols]
+print(df_offense_offense.head())
+
+# create suspect_using dataframe
+df_suspect_using = pd.read_csv(fbi_data_folder + "NIBRS_SUSPECT_USING.csv")
+print(str(len(df_suspect_using)) + " names of suspect using items in this file")
+
+# create a list of columns from suspect_using file
+suspect_using_cols = ["OFFENSE_ID", "SUSPECT_USING_ID"]
+df_suspect_using_offense = df_suspect_using[suspect_using_cols]
+print(df_suspect_using_offense.head())
+
+# use df_agency_admin dataframe
+
+# # merge agency and offense files to create a one to many file of agency ids to incidents
+# df_agency_incidents = pd.merge(df_agency_admin, df_offense_offense, on='AGENCY_ID')
+# print(df_agency_incidents.head())
 
 
 #
