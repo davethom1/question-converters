@@ -31,3 +31,18 @@ print(str(len(df_incident)) + " incidents in incident data file")
 incident_cols = ["INCIDENT_DATE", "REPORT_DATE_FLAG", "INCIDENT_HOUR", "CLEARED_EXCEPT_ID", "CLEARED_EXCEPT_DATE", "CARGO_THEFT_FLAG"]
 df_incident_incident = df_incident[incident_cols]
 print(df_incident_incident.head())
+
+#create month file for dataframe
+df_month = pd.read_csv(fbi_data_folder + "NIBRS_month.csv")
+print(str(len(df_month)) + " agency activitiy indicators by month")
+
+#create list of columns from month, convert to dataframe
+month_cols = ["AGENCY_ID", "MONTH_NUM", "REPORTED_STATUS"]
+df_month_incident = df_month[month_cols]
+print(df_month_incident.head())
+
+df_month_incident["January"] = np.where(df_month_incident["MONTH_NUM"]== 1, 1, 0)
+df_month_incident["August"] = np.where(df_month_incident["MONTH_NUM"]== 8, 1, 0)
+df_month_incident.loc[df_month_incident["MONTH_NUM"] == 2, "February"] = 1
+df_month_incident.loc[df_month_incident["MONTH_NUM"] != 2, "February"] = 0
+print(df_month_incident.head())
